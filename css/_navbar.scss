@@ -1,0 +1,182 @@
+nav {
+  position: relative;
+  z-index: 999;
+  box-shadow:0px 10px 50px 0px $color7 ;
+}
+
+.navbar {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 10px 5px;
+
+  &_brand {
+    width: 30px;
+    height: 20px;
+
+    @media screen and (min-width: $breakpoint-lg) {
+      width: 75px;
+      height: 45px;
+    }
+
+    @media screen and (min-width: $breakpoint-lg) {
+      width: 100px;
+      height: 65px;
+    }
+  }
+
+  &_menu {
+    display: flex;
+    gap: 20px;
+
+    .customBox {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      display: flex;
+
+      &~label {
+        display: none;
+      }
+
+      @media screen and (max-width:1024px) {
+
+        &~label {
+          color: white;
+          display: block;
+          display: flex;
+          align-items: center;
+          height: 18px;
+          width: 24px;
+          position: relative;
+
+          .icon {
+            width: 24px;
+            height: 2px;
+            background-color: $color5;
+
+
+            &::before,
+            &::after {
+              content: "";
+              width: 24px;
+              height: 2px;
+              background-color: $color5;
+              position: absolute;
+              display: block;
+              transform: rotate(0deg);
+              transition: all .5s ease;
+            }
+
+            &::before {
+              top: 0;
+              transition: all .5s ease;
+            }
+
+            &::after {
+              bottom: 0;
+              transition: all .5s ease;
+            }
+          }
+
+          &~.navbar_list {
+            position: absolute;
+            background-color: rgba($color: #f2f2f2, $alpha: 0.5);
+            padding: 20px;
+            top: 45px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: none;
+
+            @media screen and (min-width:1024px) {
+              left: auto;
+              margin-top: 30px;
+              max-width: 100%;
+            }
+
+            @media screen and (max-width:768px) {
+              margin-top: 0;
+              background-color: rgba($color:  #f2f2f2, $alpha: 0.5);
+            }
+          }
+        }
+
+        &:checked~label {
+          .icon {
+            transform: rotate(0deg);
+            background-color: transparent;
+
+            &::before {
+              transform: rotate(45deg);
+            }
+
+            &::after {
+              transform: rotate(-45deg);
+            }
+          }
+
+          &~.navbar_list {
+            display: block;
+            opacity: 0;
+            animation: fadeIn 1s ease .1s 1 forwards;
+          }
+        }
+      }
+    }
+
+  }
+
+  &_list {
+    list-style: none;
+    padding-left: 0px;
+
+    @media screen and (min-width: $breakpoint-lg) {
+      display: flex;
+    }
+
+    &_item {
+      margin: 10px;
+
+      @media screen and (min-width: $breakpoint-lg) {
+        margin: 5px 10px;
+
+      }
+    }
+  }
+
+  &_link {
+    text-decoration: none;
+    color: #666666;
+    font-family: $font-secondary;
+    font-weight: map-get($map: $fw, $key: regular);
+    font-size: $fs-s;
+    transition: all .5s ease;
+    margin: 0 2px;
+
+    @media screen and (min-width: $breakpoint-lg) {
+      &:hover {
+        color: $color1;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translatey(-100%);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
